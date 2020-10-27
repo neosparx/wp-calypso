@@ -46,7 +46,8 @@ import {
 	clearSignupDestinationCookie,
 } from 'calypso/signup/storageUtils';
 import CartMessages from 'calypso/my-sites/checkout/cart/cart-messages';
-import { useIsApplePayAvailable, filterAppropriatePaymentMethods } from './payment-method-helpers';
+import { useIsApplePayAvailable } from './payment-method-helpers';
+import filterAppropriatePaymentMethods from './lib/filter-appropriate-payment-methods';
 import useStoredCards from './hooks/use-stored-cards';
 import usePrepareProductsForCart from './hooks/use-prepare-products-for-cart';
 import CheckoutTerms from '../checkout/checkout-terms.jsx';
@@ -488,8 +489,7 @@ export default function CompositeCheckout( {
 				total,
 				credits,
 				subtotal,
-				allowedPaymentMethods,
-				serverAllowedPaymentMethods,
+				allowedPaymentMethods: allowedPaymentMethods || serverAllowedPaymentMethods,
 		  } );
 	debug( 'filtered payment method objects', paymentMethods );
 
