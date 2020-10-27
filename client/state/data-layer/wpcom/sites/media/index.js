@@ -55,10 +55,10 @@ export function updateMedia( action ) {
 	];
 }
 
-export const updateMediaSuccess = ( { siteId }, mediaItem ) => ( dispatch ) => {
-	dispatch( receiveMedia( siteId, mediaItem ) );
-	dispatch( gutenframeUpdateImageBlocks( mediaItem, 'updated' ) );
-};
+export const updateMediaSuccess = ( { siteId }, mediaItem ) => [
+	receiveMedia( siteId, mediaItem ),
+	gutenframeUpdateImageBlocks( mediaItem, 'updated' ),
+];
 
 export const updateMediaError = ( { siteId, originalMediaItem } ) => [
 	receiveMedia( siteId, originalMediaItem ),
@@ -122,9 +122,7 @@ export const requestMediaSuccess = ( { siteId, query }, data ) => ( dispatch, ge
 	dispatch( setNextPageHandle( siteId, data.meta ) );
 };
 
-export const requestMediaError = ( { siteId, query } ) => ( dispatch ) => {
-	dispatch( failMediaRequest( siteId, query ) );
-};
+export const requestMediaError = ( { siteId, query } ) => [ failMediaRequest( siteId, query ) ];
 
 export function requestMediaItem( action ) {
 	const { mediaId, query, siteId } = action;
@@ -144,14 +142,14 @@ export function requestMediaItem( action ) {
 	];
 }
 
-export const receiveMediaItem = ( { mediaId, siteId }, media ) => ( dispatch ) => {
-	dispatch( receiveMedia( siteId, media ) );
-	dispatch( successMediaItemRequest( siteId, mediaId ) );
-};
+export const receiveMediaItem = ( { mediaId, siteId }, media ) => [
+	receiveMedia( siteId, media ),
+	successMediaItemRequest( siteId, mediaId ),
+];
 
-export const receiveMediaItemError = ( { mediaId, siteId } ) => ( dispatch ) => {
-	dispatch( failMediaItemRequest( siteId, mediaId ) );
-};
+export const receiveMediaItemError = ( { mediaId, siteId } ) => [
+	failMediaItemRequest( siteId, mediaId ),
+];
 
 export const requestDeleteMedia = ( action ) => {
 	return [
@@ -166,11 +164,11 @@ export const requestDeleteMedia = ( action ) => {
 	];
 };
 
-export const deleteMediaSuccess = ( { siteId }, mediaItem ) => ( dispatch ) => {
-	dispatch( deleteMedia( siteId, mediaItem.ID ) );
-	dispatch( requestMediaStorage( siteId ) );
-	dispatch( gutenframeUpdateImageBlocks( mediaItem, 'deleted' ) );
-};
+export const deleteMediaSuccess = ( { siteId }, mediaItem ) => [
+	deleteMedia( siteId, mediaItem.ID ),
+	requestMediaStorage( siteId ),
+	gutenframeUpdateImageBlocks( mediaItem, 'deleted' ),
+];
 
 export const deleteMediaError = ( { mediaId } ) => [
 	removeNotice( `delete-media-notice-${ mediaId }` ),
