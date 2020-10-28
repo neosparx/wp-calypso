@@ -86,7 +86,7 @@ type State = {
 	hasFocus: boolean;
 };
 
-class Search extends React.Component< Props, State > {
+export class Search extends React.Component< Props, State > {
 	static defaultProps = {
 		autoFocus: false,
 		compact: false,
