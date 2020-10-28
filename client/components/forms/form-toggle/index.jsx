@@ -28,7 +28,6 @@ export default class FormToggle extends PureComponent {
 		checked: PropTypes.bool,
 		disabled: PropTypes.bool,
 		id: PropTypes.string,
-		className: PropTypes.string,
 		wrapperClassName: PropTypes.string,
 		toggling: PropTypes.bool,
 		'aria-label': PropTypes.string,
@@ -87,7 +86,7 @@ export default class FormToggle extends PureComponent {
 		const wrapperClasses = classNames( 'form-toggle__wrapper', this.props.wrapperClassName, {
 			'is-disabled': this.props.disabled,
 		} );
-		const toggleClasses = classNames( 'form-toggle', this.props.className, {
+		const toggleClasses = classNames( 'form-toggle', {
 			'is-toggling': this.props.toggling,
 		} );
 
